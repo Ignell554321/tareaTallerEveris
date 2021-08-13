@@ -10,7 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
 
+import lombok.Data;
 
+@Data
 @Entity
 public class Curso implements Serializable{
 	
@@ -45,79 +47,5 @@ public class Curso implements Serializable{
 	
 	@Column(name = "aula",nullable = false,length = 2)
 	private String aula;
-	
-	
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public Docente getDocente() {
-		return docente;
-	}
-
-	public void setDocente(Docente docente) {
-		this.docente = docente;
-	}
-
-	public String getServicio() {
-		return servicio;
-	}
-
-	public void setServicio(String servicio) {
-		this.servicio = servicio;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public String getNivel() {
-		return nivel;
-	}
-
-	public void setNivel(String nivel) {
-		this.nivel = nivel;
-	}
-
-	public String getCiclo() {
-		return ciclo;
-	}
-
-	public void setCiclo(String ciclo) {
-		this.ciclo = ciclo;
-	}
-
-	public String getFechaInicio() {
-		return fechaInicio;
-	}
-
-	public void setFechaInicio(String fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-	public String getFechaFin() {
-		return fechaFin;
-	}
-
-	public void setFechaFin(String fechaFin) {
-		this.fechaFin = fechaFin;
-	}
-
-	public String getAula() {
-		return aula;
-	}
-
-	public void setAula(String aula) {
-		this.aula = aula;
-	}
 	
 }

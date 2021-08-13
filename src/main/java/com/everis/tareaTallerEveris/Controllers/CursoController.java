@@ -1,9 +1,12 @@
-package com.everis.tareaTallerEveris.RestControllers;
+package com.everis.tareaTallerEveris.Controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,15 +29,14 @@ public class CursoController {
 	@RequestMapping(value= {"/Listar"},method=RequestMethod.GET)
 	public @ResponseBody List<Curso> listar() {
 		
-		
 		 return cursoServiceImpl.listar();
 	}
 	
-	//ELIMINAR Y EDITAR
+	//GUARDAR Y EDITAR
 	
 	@RequestMapping(value= {"/Guardar"},method=RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody Curso curso(@RequestBody Curso entity) {
-		System.out.println(entity);
 		 return cursoServiceImpl.guardar(entity);
 	}
 
@@ -49,5 +51,24 @@ public class CursoController {
 		}
 		
 	}
+	
+	@RequestMapping(value= {"/Buscar/{id}"},method=RequestMethod.GET)
+	public  @ResponseBody Curso buscar(@PathVariable Integer id) {
+		
+		Curso entity=cursoServiceImpl.buscar(id);
+		if(entity!=null) {
+			return entity;
+		}
+		return null;
+		
+	}
 
+	 @GetMapping("/GuardarResponseEntity")
+	 public ResponseEntity<Curso> GuardarResponseEntity() {
+		 Curso entity=cursoServiceImpl.buscar(1);
+	   HttpHeaders responseHeaders = new HttpHeaders();
+	   responseHeaders.set("MyResponseHeader", "MyValue");
+	   return new ResponseEntity<Curso>(entity, responseHeaders, HttpStatus.CREATED);
+	 }
+	
 }

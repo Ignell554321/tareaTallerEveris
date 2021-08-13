@@ -2,6 +2,7 @@ package com.everis.tareaTallerEveris.Dominio;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import lombok.Data;
+
+@Data
 @Entity
 public class Especialidad implements Serializable{
 
@@ -18,32 +24,15 @@ public class Especialidad implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id",nullable = false,columnDefinition = "smallint")
+	@Column(name = "id",nullable = false)
 	private short id;
 	
 	@Column(name = "nombre",nullable = false,length = 45)
 	private String nombre;
 	
+	@JsonBackReference
 	@ManyToMany(mappedBy = "especialidades")
 	private List<Docente> docentes;
 
-	public short getId() {
-		return id;
-	}
-
-	public void setId(short id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	
-	
-	
 
 }

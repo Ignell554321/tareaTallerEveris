@@ -1,4 +1,4 @@
-package com.everis.tareaTallerEveris.RestControllers;
+package com.everis.tareaTallerEveris.Controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,10 @@ public class DocenteController {
 		 return DocenteServiceImpl.listar();
 	}
 
-	//ELIMINAR Y EDITAR
+	//GUARDAR Y EDITAR
 	
 	@RequestMapping(value= {"/Guardar"},method=RequestMethod.POST)
+	@ResponseStatus(HttpStatus.CREATED)
 	public @ResponseBody Docente guardar(@RequestBody Docente docente) {
 		
 		
@@ -50,7 +51,16 @@ public class DocenteController {
 		if(entity!=null) {
 			DocenteServiceImpl.eliminar(entity);
 		}
+	}
+	
+	@RequestMapping(value= {"/Buscar/{id}"},method=RequestMethod.GET)
+	public  @ResponseBody Docente buscar(@PathVariable Integer id) {
 		
+		Docente entity=DocenteServiceImpl.buscar(id);
+		if(entity!=null) {
+			return entity;
+		}
+		return null;
 	}
 
 }
